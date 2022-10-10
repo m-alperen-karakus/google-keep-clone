@@ -1,0 +1,20 @@
+ion-header{
+    ion-toolbar{
+        display: flex;
+        flex-direction: row;
+        ion-title{
+            padding: 0px;
+            div{
+                display: flex !important;
+                align-items: center;
+            }
+            width: fit-content;
+        }
+        ion-searchbar{
+            width: 50%;
+            --border-radius: 8px;
+            --box-shadow:0px
+            
+        }
+    }
+}
