@@ -1,7 +1,0 @@
-{
-  "name": "google-keep-clone",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
