@@ -4,8 +4,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-col size-sm="12" size-xs="12">
-    <p>
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe inventore iure tempore eos placeat numquam voluptatem impedit ipsam eius consectetur blanditiis accusantium laudantium libero ducimus, praesentium cupiditate voluptas ullam odio?    </p>
-  </ion-col>
+
+  <div class="newNote">
+    <form [formGroup]="noteForm" >
+      <ion-list>
+        <ion-item lines="none" id="title" class="title">
+          <ion-button slot="end" fill="clear"><ion-icon name="pin-sharp"></ion-icon></ion-button>
+          <ion-input placeholder="Title" formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item lines="none" id="note">
+          <ion-textarea placeholder="Take a note..."  formControlName="note"></ion-textarea>
+        </ion-item>
+        <ion-item lines="none" class="buttons">
+            <ion-button slot="end" fill="clear" color="dark">Close</ion-button>
+        </ion-item> 
+      </ion-list>
+  
+    </form>
+
+  </div>
+
 </ion-content>
