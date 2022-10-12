@@ -10,7 +10,7 @@ class App {
         this.$noteText = document.querySelector("#note-text")
         this.$formButtons = document.querySelector('#form-buttons');
         this.$formSubmitButton = document.querySelector('#submit-button');
-        this.$formCloseButton = document.querySelector("form-close-button");
+        this.$formCloseButton = document.querySelector("#form-close-button");
         this.addEventListeners();
         this.isClicked = true;
 
@@ -24,16 +24,17 @@ class App {
         this.$form.addEventListener('submit', event => {
             event.preventDefault();
             const title = this.$noteTitle.value
-            const note = this.$noteText.value
-            const hasData = title || note
-            hasData ? this.addNote({title,note}) : console.log("value doesnt exist")
+            const text = this.$noteText.value
+        
+            const hasData = title || text
+            hasData ? this.addNote({title,text}) : console.log("value doesnt exist")
             console.log(this.notes)
 
             
             
         })
 
-        this.$formCloseButton.addEventListener("click", this.closeForm())
+        this.$formCloseButton.addEventListener("click", event =>this.closeForm(event))
         
          
 
@@ -43,9 +44,13 @@ class App {
     handleFormClick(event) {
 
         const isFormClicked = this.$form.contains(event.target); 
-        const hasntOpen = !this.$form.classList.contains("form-open")
-        isFormClicked? this.openForm() : this.closeForm()
-        
+        const title = this.$noteTitle.value
+        const text = this.$noteText.value
+        const hasData = title || text
+
+        if (isFormClicked) { this.openForm() }
+        else if(hasData) {this.addNote({title,text}); console.log(this.notes)}
+        else {this.closeForm()}        
     }
 
     openForm(){
@@ -55,7 +60,8 @@ class App {
         this.$formButtons.style.display = "block";
     }
 
-    closeForm(){
+    closeForm(event){
+        event.stopPropagation(); 
         this.$form.classList.remove('form-open');
         this.$formButtons.style.display = "none";
         this.$noteTitle.style.display = "none";
@@ -63,10 +69,10 @@ class App {
         this.$noteText.value = ""
     }
 
-    addNote(note) {
+    addNote({title,text}) {
         const newNote = {
-            title:note.title,
-            text:note.text,
+            title:title,
+            text:text,
             color: "white",
             id : this.notes.length > 0 ? this.notes[this.notes.length - 1 ].id + 1 :0
         }
